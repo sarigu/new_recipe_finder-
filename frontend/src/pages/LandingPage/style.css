@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Redacted+Script:wght@400;700&display=swap');
+
+
+.landgin-page{
+    width:100vw;
+    height:100vh;
+    margin:0;
+    padding:20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.recipe-guy{
+    background-image: url('../../assets/recipe-finder-guy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:500px;
+    height:600px;
+}
+
+.options{
+    cursor: pointer;
+}
+
+.scribble{
+    font-family: 'Redacted Script', cursive;
+}
