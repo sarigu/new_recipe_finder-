@@ -1,15 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function LandingPage() {
     return (
         <div className="landgin-page">
-            <div className="recipe-guy"></div>
             <div>
                 <h1>Recipe Finder</h1>
                 <div className="options">
-                    <h1><span className="scribble">jiqowj</span> meal</h1>
-                    <h1><span className="scribble">jiqowj</span> sweet treat</h1>
+                    <Link to="/meals"> Meals</Link>
+                    <Link to="/sweets"> Sweets</Link>
                 </div>
             </div>
         </div>

@@ -3,8 +3,30 @@ const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
-//Run to load recipes in DB 
+// ----  DELETE COLLECTION ---- 
+/*
+MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("recipe-tinder");
+    dbo.collection("sweets").drop(function (err, delOK) {
+        if (err) throw err;
+        if (delOK) console.log("Collection deleted");
+        db.close();
+    });
+});
 
+MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("recipe-tinder");
+    dbo.collection("meals").drop(function (err, delOK) {
+        if (err) throw err;
+        if (delOK) console.log("Collection deleted");
+        db.close();
+    });
+});
+*/
+
+//  ----  LOAD COLLECTIONS ---- 
 /*
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
@@ -13,7 +35,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Cabbage Dumplings',
             description: 'This is yummy',
-            imagePath: '../../assets/dumplings.png',
+            emojiUnicodes: ['0x1f951;'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -31,7 +53,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Spicy Tuna Pizza',
             description: 'This is yummy',
-            imagePath: '../../assets/pizza.png',
+            emojiUnicodes: ['0x1f951;', '0x1f951;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -50,7 +72,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Salad Pork Rolls',
             description: 'This is yummy',
-            imagePath: '../../assets/rolls.png',
+            emojiUnicodes: ['0x1f951;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -82,7 +104,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Sponge Cake',
             description: 'This is yummy',
-            imagePath: '../../assets/dumplings.png',
+            emojiUnicodes: ['0x1f951;'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -100,7 +122,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Strawberry Cake',
             description: 'This is yummy',
-            imagePath: '../../assets/pizza.png',
+            emojiUnicodes: ['0x1f951;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -137,9 +159,9 @@ const recipeQuery = async (collectionName) => {
 
 router.get('/meals/recipes', async (request, response) => {
     try {
-        const res = await recipeQuery("meals");
-        console.log("FROM DB", res);
-        return response.send(res)
+        const result = await recipeQuery("meals");
+        console.log("FROM DB", result);
+        return response.send(result)
     } catch (error) {
         console.log("ERR", error);
         return response.status(400).send('Bad request')
@@ -149,9 +171,9 @@ router.get('/meals/recipes', async (request, response) => {
 
 router.get('/sweets/recipes', async (request, response) => {
     try {
-        const res = await recipeQuery("sweets");
-        console.log("FROM DB", res);
-        return response.send(res)
+        const result = await recipeQuery("sweets");
+        console.log("FROM DB", result);
+        return response.send(result)
     } catch (error) {
         console.log("ERR", error);
         return response.status(400).send('Bad request')
@@ -170,8 +192,8 @@ const insertRecipe = async (collectionName, recipe) => {
 router.post('/meals/recipe', async (request, response) => {
     console.log("REQ", request.body)
     try {
-        const res = await insertRecipe("sweets", request.body);
-        console.log("FROM DB", res);
+        const result = await insertRecipe("sweets", request.body);
+        console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {
         console.log("ERR", error);
@@ -182,8 +204,8 @@ router.post('/meals/recipe', async (request, response) => {
 router.post('/sweets/recipe', async (request, response) => {
     console.log("REQ", request.body)
     try {
-        const res = await insertRecipe("meals", request.body);
-        console.log("FROM DB", res);
+        const result = await insertRecipe("meals", request.body);
+        console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {
         console.log("ERR", error);
