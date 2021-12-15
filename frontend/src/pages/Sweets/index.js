@@ -26,7 +26,7 @@ function SweetsPage() {
                 <Carousel>
                     {recipes && recipes.map((recipe) =>
                         <CarouselItem>
-                            <div className="recipe-box">
+                            <div className="recipe-box" data-tag={recipe._id}>
                                 <h2>{recipe.title}</h2>
                                 <span>Prep: {recipe.prepTime}min </span>
                                 <br></br>
