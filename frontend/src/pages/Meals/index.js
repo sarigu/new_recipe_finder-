@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
 import Modal from "../../components/Modal";
-
 import "./style.css";
 
 function MealsPage() {
@@ -39,7 +38,7 @@ function MealsPage() {
                     <Carousel>
                         {recipes && recipes.map((recipe) =>
                             <CarouselItem>
-                                <div className="recipe-box" data-tag={recipe._id} onClick={() => handleRecipeSelect(recipe._id)}>
+                                <div className="recipe-box" onClick={() => handleRecipeSelect(recipe._id)}>
                                     <h2>{recipe.title}</h2>
                                     <span>Prep: {recipe.prepTime}min </span>
                                     <br></br>
