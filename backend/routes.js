@@ -192,7 +192,7 @@ const insertRecipe = async (collectionName, recipe) => {
 router.post('/meals/recipe', async (request, response) => {
     console.log("REQ", request.body)
     try {
-        const result = await insertRecipe("sweets", request.body);
+        const result = await insertRecipe("meals", request.body);
         console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {
@@ -204,7 +204,7 @@ router.post('/meals/recipe', async (request, response) => {
 router.post('/sweets/recipe', async (request, response) => {
     console.log("REQ", request.body)
     try {
-        const result = await insertRecipe("meals", request.body);
+        const result = await insertRecipe("sweets", request.body);
         console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {

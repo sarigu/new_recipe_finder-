@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
-import Modal from "../../components/Modal";
+import RecipeModal from "../../components/RecipeModal";
 import "./style.css";
 
 function SweetsPage() {
@@ -36,8 +36,8 @@ function SweetsPage() {
                 <div>
                     <h1>Sweets</h1>
                     <Carousel>
-                        {recipes && recipes.map((recipe) =>
-                            <CarouselItem>
+                        {recipes && recipes.map((recipe, index) =>
+                            <CarouselItem key={index}>
                                 <div className="recipe-box" onClick={() => handleRecipeSelect(recipe._id)}>
                                     <h2>{recipe.title}</h2>
                                     <span>Prep: {recipe.prepTime}min </span>
@@ -55,7 +55,7 @@ function SweetsPage() {
                                     <p>{recipe.description}</p>
                                     <h4>Ingredients</h4>
                                     <div>
-                                        {recipe.ingredients && recipe.ingredients.map((ingredient) => <><span>{ingredient.quantity}</span> <span>{ingredient.ingredient}</span><br /></>)}
+                                        {recipe.ingredients && recipe.ingredients.map((ingredient, index) => <><span key={index}>{ingredient.quantity}</span> <span>{ingredient.ingredient}</span><br /></>)}
                                     </div>
                                 </div>
                             </CarouselItem>
@@ -63,7 +63,11 @@ function SweetsPage() {
                     </Carousel>
                 </div>
             </div>
-            <Modal recipe={selectedRecipe} modalShows={modalShows} handleClose={() => setModalShows(false)} />
+            <RecipeModal
+                recipe={selectedRecipe}
+                modalShows={modalShows}
+                handleClose={() => setModalShows(false)}
+            />
         </>
     );
 

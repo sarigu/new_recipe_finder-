@@ -1,0 +1,9 @@
+.recipe-form{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+}
+
+.error{
+    border: 2px solid red;
+}

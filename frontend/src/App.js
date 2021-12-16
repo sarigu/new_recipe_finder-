@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/index';
 import MealsPage from './pages/Meals/index';
 import SweetsPage from './pages/Sweets/index';
+import AddRecipe from './pages/AddRecipe/index';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" exact element={<LandingPage />}> </Route>
         <Route path="/meals" exact element={<MealsPage />}> </Route>
         <Route path="/sweets" exact element={<SweetsPage />}> </Route>
+        <Route path="/add/recipe" exact element={<AddRecipe />}> </Route>
       </Routes>
     </Router>
   );

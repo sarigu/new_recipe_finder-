@@ -10,6 +10,7 @@ function LandingPage() {
                 <div className="options">
                     <Link to="/meals"> Meals</Link>
                     <Link to="/sweets"> Sweets</Link>
+                    <Link to="/add/recipe"> Add</Link>
                 </div>
             </div>
         </div>

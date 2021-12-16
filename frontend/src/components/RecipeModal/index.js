@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function Modal({ recipe, modalShows, handleClose }) {
+function RecipeModal({ recipe, modalShows, handleClose }) {
     return (
         <div className={modalShows ? "modal-container" : "modal-container hide"}>
             <div className="modal-content">
@@ -38,4 +38,4 @@ function Modal({ recipe, modalShows, handleClose }) {
 
 }
 
-export default Modal;
+export default RecipeModal;

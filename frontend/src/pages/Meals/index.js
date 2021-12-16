@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
-import Modal from "../../components/Modal";
+import RecipeModal from "../../components/RecipeModal";
 import "./style.css";
 
 function MealsPage() {
@@ -8,7 +8,6 @@ function MealsPage() {
     const [recipes, setRecipes] = useState([]);
     const [modalShows, setModalShows] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState();
-
 
     useEffect(() => {
         fetch('http://localhost:8000/meals/recipes')
@@ -36,8 +35,8 @@ function MealsPage() {
                 <div>
                     <h1>Meals</h1>
                     <Carousel>
-                        {recipes && recipes.map((recipe) =>
-                            <CarouselItem>
+                        {recipes && recipes.map((recipe, index) =>
+                            <CarouselItem key={index}>
                                 <div className="recipe-box" onClick={() => handleRecipeSelect(recipe._id)}>
                                     <h2>{recipe.title}</h2>
                                     <span>Prep: {recipe.prepTime}min </span>
@@ -48,7 +47,7 @@ function MealsPage() {
                                     <br></br>
                                     {recipe.emojiUnicodes && recipe.emojiUnicodes.length > 0 ?
                                         <>
-                                            {recipe.emojiUnicodes.map((emoji) => <span> {String.fromCodePoint(parseInt(emoji))}</span>)}
+                                            {recipe.emojiUnicodes.map((emoji, index) => <span key={index}> {String.fromCodePoint(parseInt(emoji))}</span>)}
                                         </>
                                         : <span>&#x1F348;</span>
                                     }
@@ -59,7 +58,11 @@ function MealsPage() {
                     </Carousel>
                 </div>
             </div>
-            <Modal recipe={selectedRecipe} modalShows={modalShows} handleClose={() => setModalShows(false)} />
+            <RecipeModal
+                recipe={selectedRecipe}
+                modalShows={modalShows}
+                handleClose={() => setModalShows(false)}
+            />
         </>
     );
 
