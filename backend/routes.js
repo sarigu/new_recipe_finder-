@@ -3,6 +3,10 @@ const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
+const QUERY_LIMIT = 2;
+
+//http://localhost:8000/meals/recipes?page=1
+
 // ----  DELETE COLLECTION ---- 
 /*
 MongoClient.connect(url, function (err, db) {
@@ -35,7 +39,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Cabbage Dumplings',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f951;'],
+            emojiUnicodes: ['0x1f95c;', '0x1f96c;'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -53,7 +57,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Spicy Tuna Pizza',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f951;', '0x1f951;'],
+            emojiUnicodes: ['0x1f363;', '0x1f355;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -72,13 +76,31 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Salad Pork Rolls',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f951;'],
+            emojiUnicodes: ['0x1f96c;', '0x1f969;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
             ingredients: [
                 { quantity: "1 whole", ingredient: "Salad" },
                 { quantity: "500g", ingredient: "Prok Belly" },
+                { quantity: "2 Tbsp", ingredient: "Oil" },
+                { quantity: "1 Tsp", ingredient: "Salt" },
+            ],
+            vegan: false,
+            vegetarian: false,
+            treat: false,
+            meal: true
+        },
+        {
+            title: 'Cheese Sandwich',
+            description: 'This is yummy',
+            emojiUnicodes: ['0x1f35e;', '0x1f9c0;', '0x1f96a;'],
+            prepTime: 40,
+            cookingTime: 20,
+            serving: 4,
+            ingredients: [
+                { quantity: "1 whole", ingredient: "Bread" },
+                { quantity: "500g", ingredient: "Cheese" },
                 { quantity: "2 Tbsp", ingredient: "Oil" },
                 { quantity: "1 Tsp", ingredient: "Salt" },
             ],
@@ -104,7 +126,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Sponge Cake',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f951;'],
+            emojiUnicodes: ['0x1f370;'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -122,7 +144,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Strawberry Cake',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f951;'],
+            emojiUnicodes: ['0x1f370;', '0x1f353;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -132,6 +154,25 @@ MongoClient.connect(url, function (err, db) {
                 { quantity: "400g", ingredient: "Sugar" },
                 { quantity: "2", ingredient: "Eggs" },
                 { quantity: "500g", ingredient: "Strawberry" }
+            ],
+            vegan: false,
+            vegetarian: false,
+            treat: true,
+            meal: false
+        },
+         {
+            title: 'Peach Pie',
+            description: 'This is yummy',
+            emojiUnicodes: ['0x1f351;', '0x1f965;', '0x1f330;'],
+            prepTime: 40,
+            cookingTime: 20,
+            serving: 4,
+            ingredients: [
+                { quantity: "300g", ingredient: "Flour" },
+                { quantity: "200g", ingredient: "Butter" },
+                { quantity: "400g", ingredient: "Sugar" },
+                { quantity: "2", ingredient: "Eggs" },
+                { quantity: "500g", ingredient: "Peaches" }
             ],
             vegan: false,
             vegetarian: false,
@@ -148,10 +189,11 @@ MongoClient.connect(url, function (err, db) {
 
 */
 
-const recipeQuery = async (collectionName) => {
+const recipeQuery = async (collectionName, skipIndex) => {
     const db = await MongoClient.connect(url);
     const dbo = db.db("recipe-tinder");
-    const result = await dbo.collection(collectionName).find().limit(15).toArray()
+    const result = await dbo.collection(collectionName).find().limit(QUERY_LIMIT).skip(skipIndex).toArray()
+    console.log("RES", result);
     return result;
 
 }
@@ -159,7 +201,12 @@ const recipeQuery = async (collectionName) => {
 
 router.get('/meals/recipes', async (request, response) => {
     try {
-        const result = await recipeQuery("meals");
+        const page = parseInt(request.query.page);
+        console.log("PAGE", page);
+        console.log("LIMIT", QUERY_LIMIT);
+        const skipIndex = (page - 1) * QUERY_LIMIT;
+        console.log("SKIP", skipIndex);
+        const result = await recipeQuery("meals", skipIndex);
         console.log("FROM DB", result);
         return response.send(result)
     } catch (error) {
@@ -171,7 +218,12 @@ router.get('/meals/recipes', async (request, response) => {
 
 router.get('/sweets/recipes', async (request, response) => {
     try {
-        const result = await recipeQuery("sweets");
+        const page = parseInt(request.query.page);
+        console.log("PAGE", page);
+        console.log("LIMIT", QUERY_LIMIT);
+        const skipIndex = (page - 1) * QUERY_LIMIT;
+        console.log("SKIP", skipIndex);
+        const result = await recipeQuery("sweets", skipIndex);
         console.log("FROM DB", result);
         return response.send(result)
     } catch (error) {

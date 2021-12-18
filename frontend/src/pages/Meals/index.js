@@ -8,13 +8,15 @@ function MealsPage() {
     const [recipes, setRecipes] = useState([]);
     const [modalShows, setModalShows] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState();
+    const [pageIndex, setPageIndex] = useState(1);
+    const [wasLast, setWasLast] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:8000/meals/recipes')
+        fetch(`http://localhost:8000/meals/recipes?page=${pageIndex}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                setRecipes(data)
+                setRecipes(data);
+                setPageIndex(pageIndex + 1)
             })
             .catch((err) => {
                 console.log(err);
@@ -22,11 +24,25 @@ function MealsPage() {
     }, []);
 
     const handleRecipeSelect = (recipeId) => {
-        console.log("RECIPE ID", recipeId);
         let recipe = recipes.find(recipe => recipe._id === recipeId);
-        console.log("SELECTED", recipe);
         setSelectedRecipe(recipe)
         setModalShows(true);
+    }
+
+    const getNewRecipes = () => {
+        fetch(`http://localhost:8000/meals/recipes?page=${pageIndex}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    setRecipes([...recipes.concat(data)])
+                    setPageIndex(pageIndex + 1);
+                } else {
+                    setWasLast(true);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     return (
@@ -34,7 +50,10 @@ function MealsPage() {
             <div className="landgin-page">
                 <div>
                     <h1>Meals</h1>
-                    <Carousel>
+                    <Carousel
+                        onEnd={getNewRecipes}
+                        wasLast={wasLast}
+                    >
                         {recipes && recipes.map((recipe, index) =>
                             <CarouselItem key={index}>
                                 <div className="recipe-box" onClick={() => handleRecipeSelect(recipe._id)}>
