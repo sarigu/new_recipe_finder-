@@ -15,9 +15,11 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
     useEffect(() => {
         if (recipe) {
             let storedFavouriteRecipes = JSON.parse(localStorage.getItem("favouriteRecipes"));
-            let recipeExists = storedFavouriteRecipes.find(elem => elem._id === recipe._id);
-            if (recipeExists) {
-                setIsFavouriteRecipe(true);
+            if (storedFavouriteRecipes) {
+                let recipeExists = storedFavouriteRecipes.find(elem => elem._id === recipe._id);
+                if (recipeExists) {
+                    setIsFavouriteRecipe(true);
+                }
             }
         }
 
@@ -26,14 +28,14 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
     const handleHeartedRecipe = () => {
         let storedFavouriteRecipes = JSON.parse(localStorage.getItem("favouriteRecipes"));
         let favouriteRecipes = [];
-        if (storedFavouriteRecipes.length > 0 && storedFavouriteRecipes.length < FAVORUTIE_LIMIT) {
+        if (storedFavouriteRecipes && storedFavouriteRecipes.length > 0 && storedFavouriteRecipes.length < FAVORUTIE_LIMIT) {
             let recipeExists = storedFavouriteRecipes.find(elem => elem._id === recipe._id);
             if (!recipeExists) {
                 storedFavouriteRecipes.push(recipe);
                 localStorage.setItem("favouriteRecipes", JSON.stringify(storedFavouriteRecipes));
                 setIsFavouriteRecipe(true);
             }
-        } else if (storedFavouriteRecipes.length >= FAVORUTIE_LIMIT) {
+        } else if (storedFavouriteRecipes && storedFavouriteRecipes.length >= FAVORUTIE_LIMIT) {
             setFavouritesLimitReached(true);
             setShowNotification(true);
         } else {
