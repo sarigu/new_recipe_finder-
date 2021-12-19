@@ -41,11 +41,18 @@
     cursor: pointer;
 }
 
+.modal-heading{
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 .modal-recipe-details{
     width:50%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -60,17 +67,66 @@
     height:100px;
     width:100%;
     margin:30px 0 0 0;
-  }
-  
-  .emojis div {
+}
+
+.emojis div {
     font-size: 4em;
     height:fit-content;
     width: fit-content;
-  }
-  
-  .recipe .emojis div *  {
+}
+
+.recipe .emojis div *  {
     padding:10px;
-  }
+}
+
+.heart{
+    background-image: url('../../assets/heart.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width:25px;
+    height:25px;
+    margin-right: 20px;
+}
+
+.favourite-heart{
+    background-image: url('../../assets/heart-fill.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width:25px;
+    height:25px;
+    margin-right: 20px;
+}
+
+.notification{
+    position: absolute;
+    z-index: 99;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40%;
+    width: 50%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.notification-content{
+    width: 100%;
+}
+
+.notification-content p{
+    text-align: center;
+}
+
+.notification-content button{
+    display: block;
+    margin: auto;
+}
+
+
 
 @media screen and (max-width: 600px) {
     .modal-recipe-details{

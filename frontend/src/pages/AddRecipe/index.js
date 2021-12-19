@@ -213,6 +213,7 @@ function AddRecipe() {
                                 {ingredients.map((ingredient, index) =>
                                     <div key={index}>
                                         <input
+                                            style={{ marginRight: "10px" }}
                                             className={ingredientsError ? "error" : null}
                                             type="text"
                                             data-id={index}

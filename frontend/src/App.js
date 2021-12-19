@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage/index';
 import MealsPage from './pages/Meals/index';
 import SweetsPage from './pages/Sweets/index';
 import AddRecipe from './pages/AddRecipe/index';
+import Favourites from './pages/Favourites/index';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/meals" exact element={<MealsPage />}> </Route>
         <Route path="/sweets" exact element={<SweetsPage />}> </Route>
         <Route path="/add/recipe" exact element={<AddRecipe />}> </Route>
+        <Route path="/favourites" exact element={<Favourites />}> </Route>
       </Routes>
     </Router>
   );

@@ -6,6 +6,7 @@ function Navbar() {
     return (
         <div className="navbar">
             <Link to="/"> <h2>R.</h2></Link>
+            <Link to="/favourites"> <span>Your 10 Favourites</span></Link>
         </div>
     );
 
