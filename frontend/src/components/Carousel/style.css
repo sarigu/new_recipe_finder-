@@ -1,28 +1,101 @@
 .carousel {
     overflow: hidden;
-  }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width:100%;
+}
   
-  .inner {
-    white-space: nowrap;
-    transition: transform 0.3s;
+.inner {
+  white-space: nowrap;
+  transition: transform 0.3s;
+}
+
+.carousel-item {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.carousel-item:hover {
+  cursor: pointer;
+}
+
+.carousel-item .recipe {
+  border-radius: 25px 25px 0 0;
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  height: 95%;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+}
+
+.recipe .emojis{
+  width:80%;
+  height:30vh;
+  margin:50px auto 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipe .emojis div {
+  font-size: 4em;
+  height:fit-content;
+  width: fit-content;
+}
+
+.recipe .emojis div *  {
+  padding:10px;
+}
+
+.details{
+  width:70%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.details * {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding:5px 15px;
+  margin: 0 15px;
+}
+
+.indicators {
+  width: 100%;
+  padding:20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.indicators > button {
+  margin:  0 15px;
+  border-radius: 25px;
+  background-color: white;
+  padding:10px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .carousel-item .recipe {
+    height: 85%;
   }
-  
-  .carousel-item {
-    display: inline-flex;
-    padding:5px;
-    justify-content: center;
-  }
-  
-  .indicators {
+
+  .details{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
   }
-  
-  .indicators > button {
-    margin: 5px;
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 10px;
-    padding:5px;
+
+  .details * {
+    margin: 0 15px 10px 15px;
   }
-  
+}

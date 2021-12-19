@@ -1,9 +1,28 @@
 .recipe-form{
+    width:30%;
+    margin:100px auto;
+    padding: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.recipe-form form{
     display: flex;
     flex-direction: column;
-    width:30%;
 }
 
 .error{
     border: 2px solid red;
 }
+
+.recipe-form  input, .recipe-form  textarea, .recipe-form  button, .recipe-form  select{
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .recipe-form{
+        width:calc(100% - 20px);
+    }
+  }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Picker from 'emoji-picker-react';
 import "./style.css";
+import Navbar from '../../components/Navbar/index';
 
 function AddRecipe() {
     const [inputs, setInputs] = useState({ meal: true, treat: false, vegan: false, vegetarian: false });
@@ -31,20 +32,12 @@ function AddRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("SUBMIT");
-        console.log("INPUTS", inputs)
-        console.log("INGREDIENTS", ingredients)
-        console.log("EMOJIS", emojiUnicodes)
-
         await checkForErrors(inputs, ingredients, emojiUnicodes);
 
         if (!titleError && !descriptionError && !servingError && !cookingTimeError && !prepTimeError && !emojiError && !ingredientsError) {
-            console.log("READY");
             let newInputs = inputs;
             newInputs.ingredients = ingredients;
             newInputs.emojiUnicodes = emojiUnicodes;
-
-            console.log("GOOD TO GO", newInputs, "TYPE", type);
 
             fetch(`http://localhost:8000/${type}/recipe`, {
                 method: 'POST',
@@ -65,38 +58,30 @@ function AddRecipe() {
 
     const checkForErrors = async (inputs, ingredients, emojiUnicodes) => {
         if (!inputs.title) {
-            console.log("ERR")
             setTitleError(true);
         }
 
         if (!inputs.description) {
-            console.log("ERR")
             setDescriptionError(true);
         }
 
         if (!inputs.prepTime) {
-            console.log("ERR")
             setPrepTimeError(true);
         }
 
         if (!inputs.cookingTime) {
-            console.log("ERR")
             setCookingTimeError(true);
         }
 
         if (!inputs.serving) {
-            console.log("ERR")
             setServingTimeError(true);
         }
 
-        console.log(emojiUnicodes[0])
         if (emojiUnicodes.length < 1 || !emojiUnicodes[0]) {
-            console.log("EMOJI ERR")
             setEmojiError(true);
         }
 
         if (!ingredients.length > 1 || !ingredients[0].quantity || !ingredients[0].ingredient) {
-            console.log("INGREDIENTS ERR")
             setIngredientsError(true);
         }
     }
@@ -148,56 +133,142 @@ function AddRecipe() {
     }
 
     return (
-        <div>
-            <h1>Add Recipe</h1>
-            <form className="recipe-form" onSubmit={handleSubmit}>
-                <input className={titleError ? "error" : null} type="text" name="title" placeholder="title" onChange={(e) => { setTitleError(false); handleChange(e) }} />
-                <textarea className={descriptionError ? "error" : null} name="description" rows="4" cols="50" placeholder="description" onChange={(e) => { setDescriptionError(false); handleChange(e) }} >
-                </textarea>
-                <input className={prepTimeError ? "error" : null} type="number" name="prepTime" placeholder="prep time" onChange={(e) => { setPrepTimeError(false); handleChange(e) }} />
-                <input className={cookingTimeError ? "error" : null} type="number" name="cookingTime" placeholder="cooking time" onChange={(e) => { setCookingTimeError(false); handleChange(e) }} />
-                <input className={servingError ? "error" : null} type="number" name="serving" placeholder="serving" onChange={(e) => { setServingTimeError(false); handleChange(e) }} />
-                {emojis.map((emoji, index) =>
-
-                    <div key={index} className={emojiError ? "error" : null}>
-                        {chosenEmoji ? (
-                            <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }} >You chose: {emoji}</span>
-                        ) : (
-                                <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}>No emoji Chosen</span>
-                            )}
-                        {showEmojis ?
-                            <Picker
-                                onEmojiClick={onEmojiClick}
-                                disableAutoFocus={true}
+        <>
+            <div className="subpage">
+                <Navbar></Navbar>
+                <div>
+                    <h1 className="rotated-heading">Add</h1>
+                    <div className="recipe-form" >
+                        <h2>Your recipe</h2>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                className={titleError ? "error" : null}
+                                type="text"
+                                name="title"
+                                placeholder="title"
+                                onChange={(e) => { setTitleError(false); handleChange(e) }}
                             />
-                            : null
-                        }
+                            <textarea
+                                className={descriptionError ? "error" : null}
+                                name="description"
+                                rows="4"
+                                cols="50"
+                                placeholder="description"
+                                onChange={(e) => { setDescriptionError(false); handleChange(e) }}
+                            >
+                            </textarea>
+                            <input
+                                className={prepTimeError ? "error" : null}
+                                type="number"
+                                min="0"
+                                name="prepTime"
+                                placeholder="prep time"
+                                onChange={(e) => { setPrepTimeError(false); handleChange(e) }}
+                            />
+                            <input
+                                className={cookingTimeError ? "error" : null}
+                                type="number"
+                                min="0"
+                                name="cookingTime"
+                                placeholder="cooking time"
+                                onChange={(e) => { setCookingTimeError(false); handleChange(e) }}
+                            />
+                            <input
+                                className={servingError ? "error" : null}
+                                type="number"
+                                min="0"
+                                name="serving"
+                                placeholder="serving"
+                                onChange={(e) => { setServingTimeError(false); handleChange(e) }}
+                            />
+
+                            {emojis.map((emoji, index) =>
+                                <div
+                                    key={index}
+                                    className={emojiError ? "error" : null}
+                                    style={{ marginBottom: "10px" }}
+                                >
+                                    {chosenEmoji ? (
+                                        <span
+                                            onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}
+                                        >
+                                            You chose: {emoji}</span>
+                                    ) : (
+                                            <span
+                                                onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}
+                                            >
+                                                No emoji chosen</span>
+                                        )}
+                                    {showEmojis ?
+                                        <Picker
+                                            onEmojiClick={onEmojiClick}
+                                            disableAutoFocus={true}
+                                        />
+                                        : null
+                                    }
+                                </div>
+                            )}
+                            <button onClick={addEmojis}>Add emoji</button>
+                            <div className="ingredients-container" >
+                                {ingredients.map((ingredient, index) =>
+                                    <div key={index}>
+                                        <input
+                                            className={ingredientsError ? "error" : null}
+                                            type="text"
+                                            data-id={index}
+                                            name="quantity"
+                                            placeholder="quantity"
+                                            onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }}
+                                        />
+                                        <input
+                                            className={ingredientsError ? "error" : null}
+                                            type="text"
+                                            data-id={index}
+                                            name="ingredient"
+                                            placeholder="ingredient"
+                                            onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }}
+                                        />
+                                    </div>
+                                )}
+
+                            </div>
+                            <button onClick={addIngredients}>Add ingredients</button>
+                            <select
+                                id="type"
+                                name="type"
+                                onChange={handleChange}
+                            >
+                                <option value="meal">meal</option>
+                                <option value="treat">treat</option>
+                            </select>
+                            <div style={{ display: "inline-flex" }}>
+                                <input
+                                    type="checkbox"
+                                    id="vegan"
+                                    name="vegan"
+                                    value="true"
+                                    onChange={handleChange}
+                                />
+                                <label for="vegan">Vegan</label>
+
+                                <input
+                                    type="checkbox"
+                                    id="vegetarian"
+                                    name="vegetarian"
+                                    value="true"
+                                    onChange={handleChange}
+                                />
+                                <label for="vegetarian">Vegetarian</label>
+                            </div>
+                            <input
+                                type="submit"
+                                value="Submit"
+                            />
+                        </form>
                     </div>
-                )}
-
-
-                <button onClick={addEmojis}>Add emoji</button>
-                <div className={ingredientsError ? "error ingredients-container" : "ingredients-container"} >
-                    {ingredients.map((ingredient, index) =>
-                        <div key={index}>
-                            <input type="text" data-id={index} name="quantity" placeholder="quantity" onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }} />
-                            <input type="text" data-id={index} name="ingredient" placeholder="ingredient" onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }} />
-                        </div>
-                    )}
-
                 </div>
-                <button onClick={addIngredients}>Add ingredients</button>
-                <select id="type" name="type" onChange={handleChange}>
-                    <option value="meal">meal</option>
-                    <option value="treat">treat</option>
-                </select>
-                <input type="checkbox" id="vegan" name="vegan" value="true" onChange={handleChange} />
-                <label for="vegan">Vegan</label>
-                <input type="checkbox" id="vegetarian" name="vegetarian" value="true" onChange={handleChange} />
-                <label for="vegetarian">Vegetarian</label>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
+            </div>
+        </>
     );
 
 }

@@ -3,3 +3,26 @@ body{
     height:100vh;
     margin:0;
 }
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+.subpage{
+    width:100vw;
+    height:100vh;
+}
+
+.rotated-heading{
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 95px;
+}
+
+input, textarea, button{
+    padding:10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border:none;
+    border-radius: 25px;
+}

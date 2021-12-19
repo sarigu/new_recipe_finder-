@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
 import RecipeModal from "../../components/RecipeModal";
-import "./style.css";
+import Navbar from '../../components/Navbar/index';
 
 function SweetsPage() {
 
@@ -9,7 +9,7 @@ function SweetsPage() {
     const [modalShows, setModalShows] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState();
     const [pageIndex, setPageIndex] = useState(1);
-    const [wasLast, setWasLast] = useState(false);
+    const [lastRecipeReached, setLastRecipeReached] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:8000/sweets/recipes?page=${pageIndex}`)
@@ -37,7 +37,7 @@ function SweetsPage() {
                     setRecipes([...recipes.concat(data)])
                     setPageIndex(pageIndex + 1);
                 } else {
-                    setWasLast(true);
+                    setLastRecipeReached(true);
                 }
             })
             .catch((err) => {
@@ -48,35 +48,19 @@ function SweetsPage() {
 
     return (
         <>
-            <div className="landgin-page">
+            <div className="subpage">
+                <Navbar></Navbar>
                 <div>
-                    <h1>Sweets</h1>
+                    <h1 className="rotated-heading">Sweets</h1>
                     <Carousel
                         onEnd={getNewRecipes}
-                        wasLast={wasLast}
+                        lastRecipeReached={lastRecipeReached}
                     >
                         {recipes && recipes.map((recipe, index) =>
-                            <CarouselItem key={index}>
-                                <div className="recipe-box" onClick={() => handleRecipeSelect(recipe._id)}>
-                                    <h2>{recipe.title}</h2>
-                                    <span>Prep: {recipe.prepTime}min </span>
-                                    <br></br>
-                                    <span>Cooking: {recipe.cookingTime}min</span>
-                                    <br></br>
-                                    <span>Serving: {recipe.serving} people</span>
-                                    <br></br>
-                                    {recipe.emojiUnicodes && recipe.emojiUnicodes.length > 0 ?
-                                        <>
-                                            {recipe.emojiUnicodes.map((emoji) => <span> {String.fromCodePoint(parseInt(emoji))}</span>)}
-                                        </>
-                                        : <span>&#x1F348;</span>
-                                    }
-                                    <p>{recipe.description}</p>
-                                    <h4>Ingredients</h4>
-                                    <div>
-                                        {recipe.ingredients && recipe.ingredients.map((ingredient, index) => <><span key={index}>{ingredient.quantity}</span> <span>{ingredient.ingredient}</span><br /></>)}
-                                    </div>
-                                </div>
+                            <CarouselItem
+                                key={index}
+                                recipe={recipe}
+                                onHandleRecipeSelect={handleRecipeSelect}>
                             </CarouselItem>
                         )}
                     </Carousel>
