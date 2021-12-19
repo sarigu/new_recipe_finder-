@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 function RecipeModal({ recipe, modalShows, handleClose }) {
@@ -6,6 +7,10 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
     const [isFavouriteRecipe, setIsFavouriteRecipe] = useState(false);
     const [favouritesLimitReached, setFavouritesLimitReached] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
+
+    const navigate = useNavigate();
+
+    const FAVORUTIE_LIMIT = 10;
 
     useEffect(() => {
         if (recipe) {
@@ -21,16 +26,14 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
     const handleHeartedRecipe = () => {
         let storedFavouriteRecipes = JSON.parse(localStorage.getItem("favouriteRecipes"));
         let favouriteRecipes = [];
-        console.log(storedFavouriteRecipes)
-        if (storedFavouriteRecipes.length > 0 && storedFavouriteRecipes.length < 5) {
+        if (storedFavouriteRecipes.length > 0 && storedFavouriteRecipes.length < FAVORUTIE_LIMIT) {
             let recipeExists = storedFavouriteRecipes.find(elem => elem._id === recipe._id);
             if (!recipeExists) {
                 storedFavouriteRecipes.push(recipe);
                 localStorage.setItem("favouriteRecipes", JSON.stringify(storedFavouriteRecipes));
                 setIsFavouriteRecipe(true);
             }
-        } else if (storedFavouriteRecipes.length >= 5) {
-            console.log("TOO MANY");
+        } else if (storedFavouriteRecipes.length >= FAVORUTIE_LIMIT) {
             setFavouritesLimitReached(true);
             setShowNotification(true);
         } else {
@@ -90,7 +93,8 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                 <div className="notification">
                     <div className="notification-content">
                         <p>You can only have 10 favourites. Please remove some</p>
-                        <button style={{ margin: "auto" }} onClick={() => setShowNotification(false)}>Ok</button>
+                        <button style={{ margin: "0 auto 20px auto" }} onClick={() => setShowNotification(false)}>Ok</button>
+                        <button style={{ margin: "auto" }} onClick={() => navigate("/favourites")}>Update your favourites</button>
                     </div>
                 </div>
                 :

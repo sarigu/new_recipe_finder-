@@ -1,0 +1,27 @@
+.favourites-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:90%;
+    margin:auto;
+}
+
+.favourites-container * {
+    margin:15px;
+}
+
+.favourites-container .emojis{
+    height:fit-content;
+    width:100%;
+    margin:10px 0 0 0;
+}
+
+.favourites-container .emojis div {
+    font-size: 3em;
+    height:fit-content;
+    width: fit-content;
+}
+
+.favourites-container .emojis div *  {
+    padding:10px;
+}
