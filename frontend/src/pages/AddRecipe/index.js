@@ -134,9 +134,9 @@ function AddRecipe() {
 
     return (
         <>
-            <div className="subpage">
+            <div>
                 <Navbar></Navbar>
-                <div>
+                <div className="subpage">
                     <h1 className="rotated-heading">Add</h1>
                     <div className="recipe-form" >
                         <h2>Your recipe</h2>

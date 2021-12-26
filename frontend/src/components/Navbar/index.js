@@ -6,7 +6,10 @@ function Navbar() {
     return (
         <div className="navbar">
             <Link to="/"> <h2>R.</h2></Link>
-            <Link to="/favourites"> <span>Your 10 Favourites</span></Link>
+            <div>
+                <Link to="/add/recipe"> <span style={{ marginRight: "25px" }}>Add</span></Link>
+                <Link to="/favourites"> <span>Your 10 Favourites</span></Link>
+            </div>
         </div>
     );
 

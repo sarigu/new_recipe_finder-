@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 function RecipeModal({ recipe, modalShows, handleClose }) {
-
     const [isFavouriteRecipe, setIsFavouriteRecipe] = useState(false);
     const [favouritesLimitReached, setFavouritesLimitReached] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
@@ -22,10 +21,9 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                 }
             }
         }
-
     }, [recipe]);
 
-    const handleHeartedRecipe = () => {
+    const handleAddToFavourites = () => {
         let storedFavouriteRecipes = JSON.parse(localStorage.getItem("favouriteRecipes"));
         let favouriteRecipes = [];
         if (storedFavouriteRecipes && storedFavouriteRecipes.length > 0 && storedFavouriteRecipes.length < FAVORUTIE_LIMIT) {
@@ -45,7 +43,7 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
         }
     }
 
-    const handleUnheartedRecipe = () => {
+    const handleRemoveFromFavourites = () => {
         let storedFavouriteRecipes = JSON.parse(localStorage.getItem("favouriteRecipes"));
         let recipeIndex = storedFavouriteRecipes.findIndex(elem => elem._id === recipe._id);
         storedFavouriteRecipes.splice(recipeIndex, 1);
@@ -57,14 +55,14 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
     return (
         <div className={modalShows ? "modal-container" : "modal-container hide"} >
             <div className="modal-content">
-                <span className="close" onClick={() => { setIsFavouriteRecipe(false); handleClose() }}>&times;</span>
+                <span className="close" onClick={() => { setIsFavouriteRecipe(false); handleClose(); }}>&times;</span>
                 {recipe ?
                     <>
                         <div className="modal-heading">
                             <h1>{recipe.title}</h1>
                             {isFavouriteRecipe ?
-                                <div className="favourite-heart" onClick={handleUnheartedRecipe} ></div> :
-                                <div className="heart" onClick={handleHeartedRecipe} > </div>
+                                <div className="favourite-heart" onClick={handleRemoveFromFavourites} ></div> :
+                                <div className="heart" onClick={handleAddToFavourites} > </div>
                             }
                         </div>
                         <div className="modal-recipe-details">
@@ -76,7 +74,9 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                             <div>
                                 {recipe.emojiUnicodes && recipe.emojiUnicodes.length > 0 ?
                                     <>
-                                        {recipe.emojiUnicodes.map((emoji) => <span> {String.fromCodePoint(parseInt(emoji))}</span>)}
+                                        {recipe.emojiUnicodes.map((emoji) =>
+                                            <span> {String.fromCodePoint(parseInt(emoji))}</span>
+                                        )}
                                     </>
                                     : <span>&#x1F348;</span>
                                 }
@@ -85,7 +85,9 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                         <p>{recipe.description}</p>
                         <h3>Ingredients</h3>
                         <ul>
-                            {recipe.ingredients && recipe.ingredients.map((ingredient) => <li><span>{ingredient.quantity}</span> <span>{ingredient.ingredient}</span></li>)}
+                            {recipe.ingredients && recipe.ingredients.map((ingredient) =>
+                                <li><span>{ingredient.quantity}</span> <span>{ingredient.ingredient}</span></li>
+                            )}
                         </ul>
                     </>
                     : <div>Loads</div>
@@ -95,8 +97,18 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                 <div className="notification">
                     <div className="notification-content">
                         <p>You can only have 10 favourites. Please remove some</p>
-                        <button style={{ margin: "0 auto 20px auto" }} onClick={() => setShowNotification(false)}>Ok</button>
-                        <button style={{ margin: "auto" }} onClick={() => navigate("/favourites")}>Update your favourites</button>
+                        <button
+                            style={{ margin: "0 auto 20px auto" }}
+                            onClick={() => setShowNotification(false)}
+                        >
+                            Ok
+                        </button>
+                        <button
+                            style={{ margin: "auto" }}
+                            onClick={() => navigate("/favourites")}
+                        >
+                            Update your favourites
+                        </button>
                     </div>
                 </div>
                 :

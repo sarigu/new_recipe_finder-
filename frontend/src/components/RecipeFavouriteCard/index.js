@@ -9,9 +9,11 @@ function RecipeFavouriteCard({ recipe, onFavouriteCardClick }) {
                 <div>
                     {recipe.emojiUnicodes && recipe.emojiUnicodes.length > 0 ?
                         <>
-                            {recipe.emojiUnicodes.map((emoji) => <span> {String.fromCodePoint(parseInt(emoji))}</span>)}
+                            {recipe.emojiUnicodes.map((emoji) =>
+                                <span> {String.fromCodePoint(parseInt(emoji))}</span>
+                            )}
                         </>
-                        : <span>&#x1F348;</span>
+                        : <span>&#x1f348;</span>
                     }
                 </div>
             </div>

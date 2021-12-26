@@ -3,7 +3,7 @@ const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
-const QUERY_LIMIT = 2;
+const QUERY_LIMIT = 15;
 
 //http://localhost:8000/meals/recipes?page=1
 
@@ -76,7 +76,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Salad Pork Rolls',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f96c;', '0x1f969;'],
+            emojiUnicodes: ['0x1f969;', '0x1f969;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -94,7 +94,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Cheese Sandwich',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f35e;', '0x1f9c0;', '0x1f96a;'],
+            emojiUnicodes: ['0x1f35e;', '0x1f9c0;'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -189,49 +189,57 @@ MongoClient.connect(url, function (err, db) {
 
 */
 
+// ----- GET RECIPES ------ 
+
 const recipeQuery = async (collectionName, skipIndex) => {
     const db = await MongoClient.connect(url);
     const dbo = db.db("recipe-tinder");
-    const result = await dbo.collection(collectionName).find().limit(QUERY_LIMIT).skip(skipIndex).toArray()
-    console.log("RES", result);
+    const result = await dbo.collection(collectionName).find().limit(QUERY_LIMIT).skip(skipIndex).toArray();
     return result;
-
 }
-
 
 router.get('/meals/recipes', async (request, response) => {
     try {
         const page = parseInt(request.query.page);
-        console.log("PAGE", page);
-        console.log("LIMIT", QUERY_LIMIT);
         const skipIndex = (page - 1) * QUERY_LIMIT;
-        console.log("SKIP", skipIndex);
         const result = await recipeQuery("meals", skipIndex);
-        console.log("FROM DB", result);
         return response.send(result)
     } catch (error) {
-        console.log("ERR", error);
         return response.status(400).send('Bad request')
     }
 });
-
 
 router.get('/sweets/recipes', async (request, response) => {
     try {
         const page = parseInt(request.query.page);
-        console.log("PAGE", page);
-        console.log("LIMIT", QUERY_LIMIT);
         const skipIndex = (page - 1) * QUERY_LIMIT;
-        console.log("SKIP", skipIndex);
         const result = await recipeQuery("sweets", skipIndex);
-        console.log("FROM DB", result);
         return response.send(result)
     } catch (error) {
-        console.log("ERR", error);
         return response.status(400).send('Bad request')
     }
 });
 
+
+const limitedRecipeQuery = async (collectionName) => {
+    const db = await MongoClient.connect(url);
+    const dbo = db.db("recipe-tinder");
+    const result = await dbo.collection(collectionName).find().sort({ "_id": 1 }).limit(5).toArray();
+    return result;
+}
+
+router.get('/latest', async (request, response) => {
+    try {
+        const resultMeals = await limitedRecipeQuery("meals");
+        const resultSweets = await limitedRecipeQuery("sweets");
+        let resultLatestRecipes = { meals: resultMeals, sweets: resultSweets };
+        return response.send(resultLatestRecipes)
+    } catch (error) {
+        return response.status(400).send('Bad request')
+    }
+});
+
+// ----- ADD NEW RECIPES ------ 
 
 const insertRecipe = async (collectionName, recipe) => {
     const db = await MongoClient.connect(url);
@@ -240,9 +248,7 @@ const insertRecipe = async (collectionName, recipe) => {
     return result;
 }
 
-
 router.post('/meals/recipe', async (request, response) => {
-    console.log("REQ", request.body)
     try {
         const result = await insertRecipe("meals", request.body);
         console.log("FROM DB", result);
@@ -254,7 +260,6 @@ router.post('/meals/recipe', async (request, response) => {
 });
 
 router.post('/sweets/recipe', async (request, response) => {
-    console.log("REQ", request.body)
     try {
         const result = await insertRecipe("sweets", request.body);
         console.log("FROM DB", result);
@@ -264,7 +269,5 @@ router.post('/sweets/recipe', async (request, response) => {
         return response.status(400).send('Bad request')
     }
 });
-
-
 
 module.exports = router;

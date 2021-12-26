@@ -58,11 +58,9 @@ const Carousel = ({ children, onEnd, lastRecipeReached }) => {
                 className="inner"
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
-
                 {React.Children.map(children, (child, index) => {
                     return React.cloneElement(child, { width: "100%", height: "85vh" });
                 })}
-
             </div>
             <div className="indicators">
                 <button
@@ -70,10 +68,8 @@ const Carousel = ({ children, onEnd, lastRecipeReached }) => {
                         updateIndex(activeIndex - 1);
                     }}
                 >
-                    <span>	Back</span>
-
+                    <span>Back</span>
                 </button>
-
                 <button
                     onClick={() => {
                         updateIndex(activeIndex + 1);

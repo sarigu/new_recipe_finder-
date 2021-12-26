@@ -5,7 +5,6 @@ import RecipeFavouriteCard from '../../components/RecipeFavouriteCard/index';
 import RecipeModal from "../../components/RecipeModal";
 
 function FavouritesPage() {
-
     const [recipes, setRecipes] = useState([]);
     const [modalShows, setModalShows] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState();
@@ -22,20 +21,27 @@ function FavouritesPage() {
     }
 
     return (
-        <div className="subpage">
+        <div>
             <Navbar></Navbar>
-            <div >
+            <div className="scroll-subpage">
                 <h1>Favourites</h1>
                 <p>You can save your 10 favourite recipes. This list is temporary.</p>
                 <div className="favourites-container">
-                    {recipes && recipes.map((recipe, index) =>
-                        <RecipeFavouriteCard
-                            key={index}
-                            recipe={recipe}
-                            onFavouriteCardClick={() => { setSelectedRecipe(recipe); setModalShows(true); }}
-                        >
-                        </RecipeFavouriteCard>
-                    )}
+                    {recipes && recipes.length > 0 ?
+                        <>
+                            {
+                                recipes.map((recipe, index) =>
+                                    <RecipeFavouriteCard
+                                        key={index}
+                                        recipe={recipe}
+                                        onFavouriteCardClick={() => { setSelectedRecipe(recipe); setModalShows(true); }}
+                                    >
+                                    </RecipeFavouriteCard>
+                                )
+                            }
+                        </>
+                        : <div>No saved recipes</div>
+                    }
                 </div>
             </div>
             <RecipeModal

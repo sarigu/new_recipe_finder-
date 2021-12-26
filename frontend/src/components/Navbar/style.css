@@ -1,8 +1,7 @@
 .navbar{
     width:calc(100% - 20px);
-    background-color: lavenderblush;
     display: inline-flex;
     justify-content: space-between;
-    padding: 5px 10px;
+    padding: 0px 10px;
     align-items: center;
 }

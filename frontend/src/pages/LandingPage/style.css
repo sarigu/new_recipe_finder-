@@ -1,12 +1,89 @@
+.landing-page{
+    padding:20px;
+    background-color: #fdefe5; /*rgb(255, 221, 157);*/
+    color:#0215bf;
+    font-family: 'Poppins', sans-serif;
+}
+
+.landing-page h1{
+    font-size: 40px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 100px;
+    text-align: center;
+    margin: 40px 0 5px 0;
+}
+
+.hero h2{
+    font-size: 35px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.hero-container{
+    width: 100%;
+    display: inline-flex;
+    margin: -88px auto 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
 .recipe-guy{
     background-image: url('../../assets/recipe-finder-guy.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width:500px;
     height:600px;
+    width: 350px;
+    z-index: 99;
+    position: relative;
 }
 
 .options{
     cursor: pointer;
+    font-size: 50px;
+    display: flex !important;
+    flex-direction: column;
+    font-weight: bold;
+    color:whitesmoke;
 }
+
+.latest-recipes-wrapper{
+    display: inline-flex;
+    overflow-x: scroll;
+    margin-bottom: 25px;
+    width: 100%;
+    padding:10px;
+}
+
+.latest-recipes-wrapper * {
+    margin-right: 20px;
+}
+
+.accordion{
+    width:80%;
+}
+
+@media screen and (max-width: 600px) {
+    .hero h2{
+        text-align: start;
+        margin: 5px 10px 0 30px;
+    }
+
+    .hero-container{
+        margin: -50px auto 0 auto;
+    }
+
+    .recipe-guy{
+        height: 400px;
+        width: 250px;
+        margin-left:-40px;
+    }
+
+    .options{
+        margin-left: -55px;
+    }
+}
+  

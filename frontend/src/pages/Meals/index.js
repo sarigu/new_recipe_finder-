@@ -4,7 +4,6 @@ import RecipeModal from "../../components/RecipeModal";
 import Navbar from '../../components/Navbar/index';
 
 function MealsPage() {
-
     const [recipes, setRecipes] = useState([]);
     const [modalShows, setModalShows] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState();
@@ -47,9 +46,9 @@ function MealsPage() {
 
     return (
         <>
-            <div className="subpage">
+            <div>
                 <Navbar></Navbar>
-                <div>
+                <div className="subpage">
                     <h1 className="rotated-heading">Meals</h1>
                     <Carousel
                         onEnd={getNewRecipes}
