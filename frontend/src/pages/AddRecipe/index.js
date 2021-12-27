@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Picker from 'emoji-picker-react';
 import "./style.css";
 import Navbar from '../../components/Navbar/index';
+import EmoijInput from '../../components/EmojiInput/index';
 
 function AddRecipe() {
     const [inputs, setInputs] = useState({ meal: true, treat: false, vegan: false, vegetarian: false });
     const [ingredients, setIngredients] = useState([{ quantity: "", ingredient: "" }]);
-    const [chosenEmoji, setChosenEmoji] = useState(null);
-    const [showEmojis, setShowEmojis] = useState(false);
     const [emojis, setEmojis] = useState(['']);
     const [emojiUnicodes, setEmojiUnicodes] = useState(['']);
-    const [emojiIndex, setEmojiIndex] = useState(0);
     const [type, setType] = useState("meals");
 
     //Errors
@@ -120,22 +118,19 @@ function AddRecipe() {
         setIngredients([...ingredients, { quantity: "", ingredient: "" }])
     }
 
-    const onEmojiClick = (event, emojiObject) => {
-        setChosenEmoji(emojiObject);
-        setEmojiUnicodes(Object.values({ ...emojiUnicodes, [emojiIndex]: emojiObject.unified }));
-        setEmojis(Object.values({ ...emojis, [emojiIndex]: emojiObject.emoji }));
-        setShowEmojis(false);
-    };
-
-    const addEmojis = (e) => {
+    const handleAddEmojis = (e) => {
         e.preventDefault();
         setEmojis([...emojis, ''])
     }
 
-    const removeEmojis = (e) => {
+    const handleRemoveIngredients = (e) => {
         e.preventDefault();
-        console.log("REMOVE EMOJI", emojiIndex)
-        console.log("ALL EMOJI", emojis)
+        const ingredientsResult = ingredients.filter(ingredient => ingredients.indexOf(ingredient) != e.target.dataset.id);
+        if (ingredientsResult.length > 0) {
+            setIngredients(ingredientsResult);
+        } else {
+            setIngredients([{ quantity: "", ingredient: "" }]);
+        }
     }
 
     return (
@@ -189,37 +184,22 @@ function AddRecipe() {
                             />
 
                             <div className="emojis-container">
+                                <p>Describe the food in emojis</p>
                                 {emojis.map((emoji, index) =>
-                                    <div
+                                    <EmoijInput
                                         key={index}
-                                        className={emojiError ? "emoji-error" : null}
-                                        style={{ marginBottom: "15px" }}
-                                    >
-                                        {chosenEmoji ? (
-                                            <>
-                                                <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}>
-                                                    You chose: {emoji}
-                                                </span>
-                                                <span className="close" onClick={(e) => { removeEmojis(e); setEmojiError(false) }}>&times;</span>
-                                            </>
-                                        ) : (
-                                                <>
-                                                    <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}>
-                                                        Choose an emoji
-                                                    </span>
-                                                    <span className="close" onClick={(e) => { removeEmojis(e); setEmojiError(false) }}>&times;</span>
-                                                </>
-                                            )}
-                                        {showEmojis ?
-                                            <Picker
-                                                onEmojiClick={onEmojiClick}
-                                                disableAutoFocus={true}
-                                            />
-                                            : null
-                                        }
-                                    </div>
+                                        index={index}
+                                        emojiError={emojiError}
+                                        setEmojiUnicodes={setEmojiUnicodes}
+                                        emojiUnicodes={emojiUnicodes}
+                                        setEmojis={setEmojis}
+                                        emojis={emojis}
+                                        setEmojiError={setEmojiError}
+                                        existingEmoji={emoji}
+                                    />
+
                                 )}
-                                <button onClick={addEmojis}>Add another emoji</button>
+                                <button onClick={handleAddEmojis}>Add another emoji</button>
                             </div>
                             <div className="ingredients-container" >
                                 {ingredients.map((ingredient, index) =>
@@ -231,6 +211,7 @@ function AddRecipe() {
                                             data-id={index}
                                             name="quantity"
                                             placeholder="quantity"
+                                            value={ingredient.quantity}
                                             onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }}
                                         />
                                         <input
@@ -239,9 +220,16 @@ function AddRecipe() {
                                             data-id={index}
                                             name="ingredient"
                                             placeholder="ingredient"
+                                            value={ingredient.ingredient}
                                             onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }}
                                         />
-                                        <span className="close" onClick={() => { }}>&times;</span>
+                                        <span
+                                            className="close"
+                                            data-id={index}
+                                            onClick={(e) => { handleRemoveIngredients(e); setIngredientsError(false); }}
+                                        >
+                                            &times;
+                                        </span>
                                     </div>
                                 )}
                                 <button onClick={addIngredients}>Add more ingredients</button>
