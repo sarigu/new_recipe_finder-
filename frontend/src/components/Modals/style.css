@@ -23,6 +23,32 @@
     border-radius: 25px;
     overflow: scroll;
 }
+
+.feedback-modal-content{
+    background-color: var(--main-blue-color);
+    color: var(--main-peach-color);
+    margin: auto;
+    padding: 20px;
+    border:none;
+    width: 50%;
+    height: 60%;
+    border-radius: 25px;
+    position: relative;
+}
+
+.feedback-modal-content div{
+    width:80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.feedback-modal-content button{
+    background-color: var(--main-peach-color);
+    color: var(--main-blue-color);
+}
   
 .hide{
     display: none;

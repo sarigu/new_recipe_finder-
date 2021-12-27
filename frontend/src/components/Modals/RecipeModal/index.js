@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "../style.css";
 
 function RecipeModal({ recipe, modalShows, handleClose }) {
     const [isFavouriteRecipe, setIsFavouriteRecipe] = useState(false);

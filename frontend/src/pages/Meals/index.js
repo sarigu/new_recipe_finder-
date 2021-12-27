@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
-import RecipeModal from "../../components/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal";
 import Navbar from '../../components/Navbar/index';
 
 function MealsPage() {

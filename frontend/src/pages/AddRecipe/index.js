@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Picker from 'emoji-picker-react';
 import "./style.css";
-import Navbar from '../../components/Navbar/index';
-import EmoijInput from '../../components/EmojiInput/index';
+import Navbar from '../../components/Navbar';
+import EmoijInput from '../../components/EmojiInput';
+import FeedbackModal from '../../components/Modals/FeedbackModal';
+import { useNavigate } from "react-router-dom";
 
 function AddRecipe() {
+
     const [inputs, setInputs] = useState({ meal: true, treat: false, vegan: false, vegetarian: false });
     const [ingredients, setIngredients] = useState([{ quantity: "", ingredient: "" }]);
     const [emojis, setEmojis] = useState(['']);
     const [emojiUnicodes, setEmojiUnicodes] = useState(['']);
     const [type, setType] = useState("meals");
+    const [modalShows, setModalShows] = useState(false);
+
+    const navigate = useNavigate();
+
 
     //Errors
 
@@ -20,6 +26,7 @@ function AddRecipe() {
     const [cookingTimeError, setCookingTimeError] = useState(false);
     const [servingError, setServingTimeError] = useState(false);
     const [ingredientsError, setIngredientsError] = useState(false);
+    const [submissionFailed, setSubmissionFailed] = useState(false);
 
 
     useEffect(() => {
@@ -30,9 +37,11 @@ function AddRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await checkForErrors(inputs, ingredients, emojiUnicodes);
+        let result = await checkForErrors(inputs, ingredients, emojiUnicodes);
 
-        if (!titleError && !descriptionError && !servingError && !cookingTimeError && !prepTimeError && !emojiError && !ingredientsError) {
+        console.log("ERR ?? ", result, ingredients)
+
+        if (result) {
             let newInputs = inputs;
             newInputs.ingredients = ingredients;
             newInputs.emojiUnicodes = emojiUnicodes;
@@ -44,44 +53,56 @@ function AddRecipe() {
                 },
                 body: JSON.stringify(newInputs),
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
+                .then(res => {
+                    if (res.status === 200) {
+                        setSubmissionFailed(false);
+                        setModalShows(true);
+                    } else {
+                        setSubmissionFailed(true);
+                        setModalShows(true);
+                    }
                 })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+
         }
     }
 
     const checkForErrors = async (inputs, ingredients, emojiUnicodes) => {
         if (!inputs.title) {
             setTitleError(true);
+            return false;
         }
 
         if (!inputs.description) {
             setDescriptionError(true);
+            return false;
         }
 
         if (!inputs.prepTime) {
             setPrepTimeError(true);
+            return false;
         }
 
         if (!inputs.cookingTime) {
             setCookingTimeError(true);
+            return false;
         }
 
         if (!inputs.serving) {
             setServingTimeError(true);
+            return false;
         }
 
         if (emojiUnicodes.length < 1 || !emojiUnicodes[0]) {
             setEmojiError(true);
+            return false;
         }
 
         if (!ingredients.length > 1 || !ingredients[0].quantity || !ingredients[0].ingredient) {
             setIngredientsError(true);
+            return false;
         }
+
+        return true;
     }
 
 
@@ -115,7 +136,7 @@ function AddRecipe() {
 
     const addIngredients = (e) => {
         e.preventDefault();
-        setIngredients([...ingredients, { quantity: "", ingredient: "" }])
+        setIngredients(Object.values({ ...ingredients, [ingredients.length + 1]: { quantity: "", ingredient: "" } }));
     }
 
     const handleAddEmojis = (e) => {
@@ -265,11 +286,18 @@ function AddRecipe() {
                             <input
                                 type="submit"
                                 value="Submit"
+
                             />
+
                         </form>
                     </div>
                 </div>
             </div>
+            <FeedbackModal
+                modalShows={modalShows}
+                handleClose={() => { navigate("/"); setModalShows(false) }}
+                submissionFailed={submissionFailed}
+            />
         </>
     );
 

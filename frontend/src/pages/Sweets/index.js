@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel, { CarouselItem } from "../../components/Carousel";
-import RecipeModal from "../../components/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal";
 import Navbar from '../../components/Navbar/index';
 
 function SweetsPage() {
@@ -15,7 +15,6 @@ function SweetsPage() {
             .then((res) => res.json())
             .then((data) => {
                 setRecipes(data);
-                console.log("DATA", data);
                 setPageIndex(pageIndex + 1)
             })
             .catch((err) => {

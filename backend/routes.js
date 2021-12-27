@@ -224,7 +224,7 @@ router.get('/sweets/recipes', async (request, response) => {
 const limitedRecipeQuery = async (collectionName) => {
     const db = await MongoClient.connect(url);
     const dbo = db.db("recipe-tinder");
-    const result = await dbo.collection(collectionName).find().sort({ "_id": 1 }).limit(5).toArray();
+    const result = await dbo.collection(collectionName).find().sort({ "_id": -1 }).limit(5).toArray();
     return result;
 }
 
@@ -244,7 +244,9 @@ router.get('/latest', async (request, response) => {
 const insertRecipe = async (collectionName, recipe) => {
     const db = await MongoClient.connect(url);
     const dbo = db.db("recipe-tinder");
+    console.log(recipe)
     const result = await dbo.collection(collectionName).insertOne(recipe);
+    console.log("INSERT", result);
     return result;
 }
 

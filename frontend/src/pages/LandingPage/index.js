@@ -56,6 +56,7 @@ function LandingPage() {
         fetch('http://localhost:8000/latest')
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setLatestMeals(data.meals);
                 setLatestSweets(data.sweets);
             })
