@@ -15,6 +15,7 @@ function SweetsPage() {
             .then((res) => res.json())
             .then((data) => {
                 setRecipes(data);
+                console.log("DATA", data);
                 setPageIndex(pageIndex + 1)
             })
             .catch((err) => {

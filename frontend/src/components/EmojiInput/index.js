@@ -25,7 +25,7 @@ const EmoijInput = ({
 
     const handleEmojiClick = (event, emojiObject) => {
         setChosenEmoji(emojiObject.emoji);
-        setEmojiUnicodes(Object.values({ ...emojiUnicodes, [emojiIndex]: emojiObject.unified }));
+        setEmojiUnicodes(Object.values({ ...emojiUnicodes, [emojiIndex]: "0x" + emojiObject.unified }));
         setEmojis(Object.values({ ...emojis, [emojiIndex]: emojiObject.emoji }));
         setShowEmojis(false);
     };

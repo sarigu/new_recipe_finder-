@@ -39,7 +39,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Cabbage Dumplings',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f95c;', '0x1f96c;'],
+            emojiUnicodes: ['0x1f95c', '0x1f96c'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -57,7 +57,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Spicy Tuna Pizza',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f363;', '0x1f355;'],
+            emojiUnicodes: ['0x1f363', '0x1f355'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -76,7 +76,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Salad Pork Rolls',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f969;', '0x1f969;'],
+            emojiUnicodes: ['0x1f969', '0x1f969'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -94,7 +94,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Cheese Sandwich',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f35e;', '0x1f9c0;'],
+            emojiUnicodes: ['0x1f35e', '0x1f9c0'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -126,7 +126,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Sponge Cake',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f370;'],
+            emojiUnicodes: ['0x1f370'],
             prepTime: 40,
             cookingTime: 10,
             serving: 4,
@@ -144,7 +144,7 @@ MongoClient.connect(url, function (err, db) {
         {
             title: 'Strawberry Cake',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f370;', '0x1f353;'],
+            emojiUnicodes: ['0x1f370', '0x1f353'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
@@ -160,10 +160,10 @@ MongoClient.connect(url, function (err, db) {
             treat: true,
             meal: false
         },
-         {
+        {
             title: 'Peach Pie',
             description: 'This is yummy',
-            emojiUnicodes: ['0x1f351;', '0x1f965;', '0x1f330;'],
+            emojiUnicodes: ['0x1f351', '0x1f965', '0x1f330'],
             prepTime: 40,
             cookingTime: 20,
             serving: 4,
