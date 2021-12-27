@@ -132,11 +132,17 @@ function AddRecipe() {
         setEmojis([...emojis, ''])
     }
 
+    const removeEmojis = (e) => {
+        e.preventDefault();
+        console.log("REMOVE EMOJI", emojiIndex)
+        console.log("ALL EMOJI", emojis)
+    }
+
     return (
         <>
             <div>
                 <Navbar></Navbar>
-                <div className="subpage">
+                <div className="scroll-subpage">
                     <h1 className="rotated-heading">Add</h1>
                     <div className="recipe-form" >
                         <h2>Your recipe</h2>
@@ -182,38 +188,44 @@ function AddRecipe() {
                                 onChange={(e) => { setServingTimeError(false); handleChange(e) }}
                             />
 
-                            {emojis.map((emoji, index) =>
-                                <div
-                                    key={index}
-                                    className={emojiError ? "error" : null}
-                                    style={{ marginBottom: "10px" }}
-                                >
-                                    {chosenEmoji ? (
-                                        <span
-                                            onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}
-                                        >
-                                            You chose: {emoji}</span>
-                                    ) : (
-                                            <span
-                                                onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}
-                                            >
-                                                No emoji chosen</span>
-                                        )}
-                                    {showEmojis ?
-                                        <Picker
-                                            onEmojiClick={onEmojiClick}
-                                            disableAutoFocus={true}
-                                        />
-                                        : null
-                                    }
-                                </div>
-                            )}
-                            <button onClick={addEmojis}>Add emoji</button>
+                            <div className="emojis-container">
+                                {emojis.map((emoji, index) =>
+                                    <div
+                                        key={index}
+                                        className={emojiError ? "emoji-error" : null}
+                                        style={{ marginBottom: "15px" }}
+                                    >
+                                        {chosenEmoji ? (
+                                            <>
+                                                <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}>
+                                                    You chose: {emoji}
+                                                </span>
+                                                <span className="close" onClick={(e) => { removeEmojis(e); setEmojiError(false) }}>&times;</span>
+                                            </>
+                                        ) : (
+                                                <>
+                                                    <span onClick={() => { setShowEmojis(true); setEmojiIndex(index); setEmojiError(false) }}>
+                                                        Choose an emoji
+                                                    </span>
+                                                    <span className="close" onClick={(e) => { removeEmojis(e); setEmojiError(false) }}>&times;</span>
+                                                </>
+                                            )}
+                                        {showEmojis ?
+                                            <Picker
+                                                onEmojiClick={onEmojiClick}
+                                                disableAutoFocus={true}
+                                            />
+                                            : null
+                                        }
+                                    </div>
+                                )}
+                                <button onClick={addEmojis}>Add another emoji</button>
+                            </div>
                             <div className="ingredients-container" >
                                 {ingredients.map((ingredient, index) =>
                                     <div key={index}>
                                         <input
-                                            style={{ marginRight: "10px" }}
+                                            style={{ marginRight: "15px" }}
                                             className={ingredientsError ? "error" : null}
                                             type="text"
                                             data-id={index}
@@ -229,11 +241,11 @@ function AddRecipe() {
                                             placeholder="ingredient"
                                             onChange={(e) => { setIngredientsError(false); handleIngredientsChange(e) }}
                                         />
+                                        <span className="close" onClick={() => { }}>&times;</span>
                                     </div>
                                 )}
-
+                                <button onClick={addIngredients}>Add more ingredients</button>
                             </div>
-                            <button onClick={addIngredients}>Add ingredients</button>
                             <select
                                 id="type"
                                 name="type"
@@ -242,7 +254,7 @@ function AddRecipe() {
                                 <option value="meal">meal</option>
                                 <option value="treat">treat</option>
                             </select>
-                            <div style={{ display: "inline-flex" }}>
+                            <div className="diet-type-options">
                                 <input
                                     type="checkbox"
                                     id="vegan"
@@ -253,6 +265,7 @@ function AddRecipe() {
                                 <label for="vegan">Vegan</label>
 
                                 <input
+                                    style={{ marginLeft: "20px" }}
                                     type="checkbox"
                                     id="vegetarian"
                                     name="vegetarian"

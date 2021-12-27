@@ -7,7 +7,7 @@ const Accordion = ({ question, answer }) => {
 
     return (
         <div className="question-wrapper" onClick={() => setIsActive(!isActive)}>
-            <div className={isActive ? "status opened" : "status"}></div>
+            <div className={isActive ? "circle-status opened" : "circle-status"}></div>
             <div className="container">
                 <h3>
                     {question}

@@ -1,7 +1,17 @@
 .navbar{
-    width:calc(100% - 20px);
+    width:calc(100% - 40px);
     display: inline-flex;
     justify-content: space-between;
     padding: 0px 10px;
     align-items: center;
+}
+
+.navbar * :hover{
+    filter: brightness(150%);
+}
+
+.navbar .dot{
+    width:5px;
+    height:5px;
+    margin-left:2px;
 }

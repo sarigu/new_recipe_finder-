@@ -63,20 +63,20 @@ const Carousel = ({ children, onEnd, lastRecipeReached }) => {
                 })}
             </div>
             <div className="indicators">
-                <button
+                <div
+                    className="back-button"
                     onClick={() => {
                         updateIndex(activeIndex - 1);
                     }}
                 >
-                    <span>Back</span>
-                </button>
-                <button
+                </div>
+                <div
+                    className="next-button"
                     onClick={() => {
                         updateIndex(activeIndex + 1);
                     }}
                 >
-                    <span>Next</span>
-                </button>
+                </div>
             </div>
         </div>
     );

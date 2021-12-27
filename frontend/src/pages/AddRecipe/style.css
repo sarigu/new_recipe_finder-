@@ -1,11 +1,8 @@
+
 .recipe-form{
-    width:30%;
-    margin:100px auto;
-    padding: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width:35%;
+    margin: auto;
+    padding:50px 0;
 }
 
 .recipe-form form{
@@ -13,16 +10,49 @@
     flex-direction: column;
 }
 
+.recipe-form .close{
+    color:  var(--main-blue-color);;
+}
+
 .error{
     border: 2px solid red;
+}
+
+.emoji-error{
+    color:red;
 }
 
 .recipe-form  input, .recipe-form  textarea, .recipe-form  button, .recipe-form  select{
     margin-bottom: 15px;
 }
 
+.emojis-container{
+    margin:20px 0;
+    cursor: pointer;
+}
+
+.ingredients-container{
+    margin: 0 0 20px 0;
+}
+
+input[type="submit"]{
+    margin-top: 20px;
+}
+
+.diet-type-options{
+    margin-top:10px;
+    display: inline-flex;
+}
+
 @media screen and (max-width: 600px) {
     .recipe-form{
-        width:calc(100% - 20px);
+        width:90%;
+        padding:150px 0;
     }
-  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    .recipe-form{
+        width:60%;
+    }
+}

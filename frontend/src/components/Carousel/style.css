@@ -1,9 +1,8 @@
 .carousel {
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width:100%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width:calc(100vw - 40px);
 }
   
 .inner {
@@ -23,11 +22,19 @@
 .carousel-item .recipe {
   border-radius: 25px 25px 0 0;
   position: absolute;
-  bottom: 0;
+  bottom:0;
   width: 80%;
-  height: 95%;
+  height: 90%;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+  border: var(--main-blue-color) 2px solid;
+  padding:20px;
+}
+
+.recipe h1 {
+  width: 100%; 
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap;
 }
 
 .recipe .emojis{
@@ -59,7 +66,8 @@
 }
 
 .details * {
-  border: 2px solid black;
+  background-color: var(--main-blue-color);
+  color:var(--main-peach-color);
   border-radius: 15px;
   padding:5px 15px;
   margin: 0 15px;
@@ -75,19 +83,36 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
-.indicators > button {
-  margin:  0 15px;
-  border-radius: 25px;
-  background-color: white;
-  padding:10px;
+.back-button{
+  background-image: url('../../assets/arrow-left.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width:40px;
+  height:40px;
+}
+
+.next-button{
+  background-image: url('../../assets/arrow-right.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width:40px;
+  height:40px;
 }
 
 
 @media screen and (max-width: 600px) {
+  .carousel{
+    width: 100vw;
+ 
+  }
+
   .carousel-item .recipe {
-    height: 85%;
+    height: 75%;
   }
 
   .details{
@@ -97,5 +122,9 @@
 
   .details * {
     margin: 0 15px 10px 15px;
+  }
+
+  .back-button, .next-button{
+    background-color: var(--main-peach-color);
   }
 }

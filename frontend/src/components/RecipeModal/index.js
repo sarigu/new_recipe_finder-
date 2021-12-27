@@ -61,11 +61,11 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                         <div className="modal-heading">
                             <h1>{recipe.title}</h1>
                             {isFavouriteRecipe ?
-                                <div className="favourite-heart" onClick={handleRemoveFromFavourites} ></div> :
+                                <div className="filled-heart" onClick={handleRemoveFromFavourites} ></div> :
                                 <div className="heart" onClick={handleAddToFavourites} > </div>
                             }
                         </div>
-                        <div className="modal-recipe-details">
+                        <div className="recipe-details">
                             <span>Prep: {recipe.prepTime}min </span>
                             <span>Cooking: {recipe.cookingTime}min</span>
                             <span>Serving: {recipe.serving} people</span>
@@ -82,7 +82,7 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                                 }
                             </div>
                         </div>
-                        <p>{recipe.description}</p>
+                        <p className="recipe-description">{recipe.description}</p>
                         <h3>Ingredients</h3>
                         <ul>
                             {recipe.ingredients && recipe.ingredients.map((ingredient) =>

@@ -13,7 +13,8 @@
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--main-blue-color);
+    color: var(--main-peach-color);
     margin: auto;
     padding: 20px;
     border:none;
@@ -28,7 +29,7 @@
 }
 
 .close {
-    color: #aaa;
+    color: var(--main-peach-color);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -36,7 +37,8 @@
   
 .close:hover,
 .close:focus {
-    color: black;
+    color: var(--main-peach-color);
+    filter: brightness(150%);
     text-decoration: none;
     cursor: pointer;
 }
@@ -48,7 +50,7 @@
     align-items: baseline;
 }
 
-.modal-recipe-details{
+.modal-content .recipe-details{
     width:50%;
     display: flex;
     flex-direction: row;
@@ -56,8 +58,9 @@
     justify-content: space-between;
 }
 
-.modal-recipe-details * {
-    border: 2px solid black;
+.modal-content .recipe-details * {
+    background-color: var(--main-peach-color);
+    color:var(--main-blue-color);
     border-radius: 15px;
     padding:5px 15px;
     margin: 0 15px 0 0;
@@ -69,14 +72,19 @@
     margin:30px 0 0 0;
 }
 
-.emojis div {
+.modal-content .emojis div {
     font-size: 4em;
     height:fit-content;
     width: fit-content;
 }
 
-.recipe .emojis div *  {
+.modal-content .emojis div *  {
     padding:10px;
+}
+
+.modal-content .recipe-description{
+    width: 60%;
+    margin-bottom: 30px;
 }
 
 .heart{
@@ -86,15 +94,17 @@
     width:25px;
     height:25px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
-.favourite-heart{
+.filled-heart{
     background-image: url('../../assets/heart-fill.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     width:25px;
     height:25px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .notification{
@@ -126,17 +136,32 @@
     margin: auto;
 }
 
+@media screen and (min-width: 600px) and (max-width: 1200px) and (orientation: landscape) {
+    .modal-content .recipe-details{
+        width:65%;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) and (orientation: portrait) {
+    .modal-content .recipe-details{
+        width:80%;
+    }
+}
 
 
 @media screen and (max-width: 600px) {
-    .modal-recipe-details{
+    .modal-content .recipe-details{
         width:50%;
         display: flex;
         flex-direction: column;
     }
 
-    .modal-recipe-details * {
+    .modal-content .recipe-details * {
         margin: 0 0 10px 0;
+    }
+
+    .modal-content .recipe-description{
+        width: 90%;
     }
 }
   
