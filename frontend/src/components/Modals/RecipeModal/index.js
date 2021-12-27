@@ -70,6 +70,10 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                             <span>Cooking: {recipe.cookingTime}min</span>
                             <span>Serving: {recipe.serving} people</span>
                         </div>
+                        <div className="diet-type">
+                            {recipe.vegan ? <span>Vegan</span> : null}
+                            {recipe.vegetarian ? <span>Vegetarian</span> : null}
+                        </div>
                         <div className="emojis">
                             <div>
                                 {recipe.emojiUnicodes && recipe.emojiUnicodes.length > 0 ?

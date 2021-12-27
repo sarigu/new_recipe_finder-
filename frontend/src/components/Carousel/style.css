@@ -39,7 +39,7 @@
 
 .recipe .emojis{
   width:80%;
-  height:30vh;
+  height:25vh;
   margin:50px auto 20px auto;
   display: flex;
   justify-content: center;
@@ -56,7 +56,7 @@
   padding:10px;
 }
 
-.details{
+.recipe .details {
   width:70%;
   margin: 50px auto;
   display: flex;
@@ -65,9 +65,26 @@
   justify-content: space-evenly;
 }
 
-.details * {
+.recipe .details * {
   background-color: var(--main-blue-color);
   color:var(--main-peach-color);
+  border-radius: 15px;
+  padding:5px 15px;
+  margin: 0 15px;
+}
+
+.recipe .diet-type{
+  width:40%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.recipe .diet-type * {
+  border: 2px solid var(--main-blue-color);
+  color:var(--main-blue-color);
   border-radius: 15px;
   padding:5px 15px;
   margin: 0 15px;
@@ -104,8 +121,19 @@
   height:40px;
 }
 
+@media screen and (min-width: 600px)  and (max-width: 1200px) and (orientation: portrait){
+  .carousel-item .recipe {
+    height: 80%;
+  }
+}
+
 
 @media screen and (max-width: 600px) {
+
+  .recipe .emojis {
+    height: 15vh;
+  }
+
   .carousel{
     width: 100vw;
  
@@ -115,12 +143,12 @@
     height: 75%;
   }
 
-  .details{
+  .details, .diet-type{
     display: flex;
     flex-direction: column;
   }
 
-  .details * {
+  .details * , .diet-type *  {
     margin: 0 15px 10px 15px;
   }
 

@@ -24,7 +24,10 @@ export const CarouselItem = ({ width, height, recipe, onHandleRecipeSelect }) =>
                     <span>Cooking: {recipe.cookingTime}min</span>
                     <span>Servings: {recipe.serving} people</span>
                 </div>
-
+                <div className="diet-type">
+                    {recipe.vegan ? <span>Vegan</span> : null}
+                    {recipe.vegetarian ? <span>Vegetarian</span> : null}
+                </div>
             </div>
         </div>
     );
