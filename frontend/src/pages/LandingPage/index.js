@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar/index';
 import RecipeFavouriteCard from '../../components/RecipeFavouriteCard/index';
 import Accordion from '../../components/Accordion/index';
 import Footer from '../../components/Footer/index';
-import RecipeModal from "../../components/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal";
 
 function LandingPage() {
 
@@ -137,8 +137,12 @@ function LandingPage() {
                     <h1>FAQ</h1>
                     <p>Figuring out what to cook can be a hard process. We are here to help you.</p>
                     <div className="accordion">
-                        {accordionData.map(elem => (
-                            <Accordion question={elem.question} answer={elem.answer} />
+                        {accordionData.map((elem, index) => (
+                            <Accordion
+                                key={index}
+                                question={elem.question}
+                                answer={elem.answer}
+                            />
                         ))}
 
                     </div>

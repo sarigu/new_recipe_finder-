@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./style.css";
 import Navbar from '../../components/Navbar/index';
 import RecipeFavouriteCard from '../../components/RecipeFavouriteCard/index';
-import RecipeModal from "../../components/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal";
 
 function FavouritesPage() {
     const [recipes, setRecipes] = useState([]);

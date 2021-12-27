@@ -73,6 +73,7 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
                         <div className="diet-type">
                             {recipe.vegan ? <span>Vegan</span> : null}
                             {recipe.vegetarian ? <span>Vegetarian</span> : null}
+
                         </div>
                         <div className="emojis">
                             <div>
