@@ -4,7 +4,6 @@ import "./style.css";
 const Accordion = ({ question, answer }) => {
     const [isActive, setIsActive] = useState(false);
 
-
     return (
         <div className="question-wrapper" onClick={() => setIsActive(!isActive)}>
             <div className={isActive ? "circle-status opened" : "circle-status"}></div>

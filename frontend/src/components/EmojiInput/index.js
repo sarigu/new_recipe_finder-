@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Picker from 'emoji-picker-react';
-import "./style.css";
 
 const EmoijInput = ({
     index,
@@ -48,7 +47,7 @@ const EmoijInput = ({
     return (
         <div
             className={emojiError ? "emoji-error" : null}
-            style={{ marginBottom: "15px" }}
+            style={{ marginBottom: "15px", cursor: "pointer" }}
         >
             {chosenEmoji ? (
                 <>

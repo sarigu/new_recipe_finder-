@@ -8,7 +8,6 @@ import Footer from '../../components/Footer/index';
 import RecipeModal from "../../components/Modals/RecipeModal";
 
 function LandingPage() {
-
     const [latestMeals, setLatestMeals] = useState([]);
     const [latestSweets, setLatestSweets] = useState([]);
     const [modalShows, setModalShows] = useState(false);
@@ -56,7 +55,6 @@ function LandingPage() {
         fetch('http://localhost:8000/latest')
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setLatestMeals(data.meals);
                 setLatestSweets(data.sweets);
             })
@@ -64,7 +62,6 @@ function LandingPage() {
                 console.log(err);
             });
     }, []);
-
 
     return (
         <div>

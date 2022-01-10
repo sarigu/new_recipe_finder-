@@ -3,6 +3,7 @@ import "./style.css";
 import Navbar from '../../components/Navbar/index';
 import RecipeFavouriteCard from '../../components/RecipeFavouriteCard/index';
 import RecipeModal from "../../components/Modals/RecipeModal";
+import Footer from '../../components/Footer/index';
 
 function FavouritesPage() {
     const [recipes, setRecipes] = useState([]);
@@ -23,9 +24,9 @@ function FavouritesPage() {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="scroll-subpage">
+            <div className="scroll-subpage favourites">
                 <h1>Favourites</h1>
-                <p>You can save your 10 favourite recipes. This list is temporary.</p>
+                <p>You can save up to 10 of your favourite recipes. This list is temporary.</p>
                 <div className="favourites-container">
                     {recipes && recipes.length > 0 ?
                         <>
@@ -40,10 +41,11 @@ function FavouritesPage() {
                                 )
                             }
                         </>
-                        : <div>No saved recipes</div>
+                        : <p style={{ fontWeight: "bold" }}>You have no saved recipes</p>
                     }
                 </div>
             </div>
+            <Footer />
             <RecipeModal
                 recipe={selectedRecipe}
                 modalShows={modalShows}

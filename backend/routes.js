@@ -244,19 +244,15 @@ router.get('/latest', async (request, response) => {
 const insertRecipe = async (collectionName, recipe) => {
     const db = await MongoClient.connect(url);
     const dbo = db.db("recipe-tinder");
-    console.log(recipe)
     const result = await dbo.collection(collectionName).insertOne(recipe);
-    console.log("INSERT", result);
     return result;
 }
 
 router.post('/meals/recipe', async (request, response) => {
     try {
         const result = await insertRecipe("meals", request.body);
-        console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {
-        console.log("ERR", error);
         return response.status(400).send('Bad request')
     }
 });
@@ -264,10 +260,8 @@ router.post('/meals/recipe', async (request, response) => {
 router.post('/sweets/recipe', async (request, response) => {
     try {
         const result = await insertRecipe("sweets", request.body);
-        console.log("FROM DB", result);
         return response.status(200).send('Ok')
     } catch (error) {
-        console.log("ERR", error);
         return response.status(400).send('Bad request')
     }
 });

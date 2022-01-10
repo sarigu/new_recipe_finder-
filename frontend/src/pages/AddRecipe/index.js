@@ -3,6 +3,7 @@ import "./style.css";
 import Navbar from '../../components/Navbar';
 import EmoijInput from '../../components/EmojiInput';
 import FeedbackModal from '../../components/Modals/FeedbackModal';
+import Footer from '../../components/Footer/index';
 import { useNavigate } from "react-router-dom";
 
 function AddRecipe() {
@@ -39,8 +40,6 @@ function AddRecipe() {
 
         let result = await checkForErrors(inputs, ingredients, emojiUnicodes);
 
-        console.log("ERR ?? ", result, ingredients)
-
         if (result) {
             let newInputs = inputs;
             newInputs.ingredients = ingredients;
@@ -62,7 +61,6 @@ function AddRecipe() {
                         setModalShows(true);
                     }
                 })
-
         }
     }
 
@@ -272,7 +270,6 @@ function AddRecipe() {
                                     onChange={handleChange}
                                 />
                                 <label for="vegan">Vegan</label>
-
                                 <input
                                     style={{ marginLeft: "20px" }}
                                     type="checkbox"
@@ -293,6 +290,7 @@ function AddRecipe() {
                     </div>
                 </div>
             </div>
+            <Footer />
             <FeedbackModal
                 modalShows={modalShows}
                 handleClose={() => { navigate("/"); setModalShows(false) }}
@@ -300,7 +298,6 @@ function AddRecipe() {
             />
         </>
     );
-
 }
 
 export default AddRecipe;

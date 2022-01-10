@@ -21,7 +21,6 @@ function RecipeFavouriteCard({ recipe, onFavouriteCardClick }) {
             </div>
         </div>
     );
-
 }
 
 export default RecipeFavouriteCard;

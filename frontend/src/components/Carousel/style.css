@@ -16,7 +16,7 @@
 }
 
 .carousel-item:hover {
-  cursor: pointer;
+   cursor: url('../../assets/finger.png'), auto;
 }
 
 .carousel-item .recipe {
@@ -26,7 +26,7 @@
   width: 80%;
   height: 90%;
   overflow: hidden;
-  border: var(--main-blue-color) 2px solid;
+  border: var(--main-pink-color) 2px solid;
   padding:20px;
 }
 
@@ -66,8 +66,8 @@
 }
 
 .recipe .details * {
-  background-color: var(--main-blue-color);
-  color:var(--main-peach-color);
+  background-color: var(--main-pink-color);
+  color:var(--main-orange-color);
   border-radius: 15px;
   padding:5px 15px;
   margin: 0 15px;
@@ -83,8 +83,8 @@
 }
 
 .recipe .diet-type * {
-  border: 2px solid var(--main-blue-color);
-  color:var(--main-blue-color);
+  border: 2px solid var(--main-pink-color);
+  color:var(--main-pink-color);
   border-radius: 15px;
   padding:5px 15px;
   margin: 0 15px;
@@ -153,6 +153,6 @@
   }
 
   .back-button, .next-button{
-    background-color: var(--main-peach-color);
+    background-color: var(--main-orange-color);
   }
 }

@@ -6,7 +6,11 @@ import "./style.css";
 
 export const CarouselItem = ({ width, height, recipe, onHandleRecipeSelect }) => {
     return (
-        <div className="carousel-item" style={{ width: width, height: height }} onClick={() => onHandleRecipeSelect(recipe._id)}>
+        <div
+            className="carousel-item"
+            style={{ width: width, height: height }}
+            onClick={() => onHandleRecipeSelect(recipe._id)}
+        >
             <div className="recipe"  >
                 <div className="emojis">
                     <div>

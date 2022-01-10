@@ -2,9 +2,6 @@ import React from 'react';
 import "../style.css";
 
 function FeedbackModal({ modalShows, handleClose, submissionFailed }) {
-
-    console.log(submissionFailed);
-
     return (
         <div className={modalShows ? "modal-container" : "modal-container hide"} >
             <div className="feedback-modal-content">

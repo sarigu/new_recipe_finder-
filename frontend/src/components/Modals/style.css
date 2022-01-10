@@ -1,20 +1,20 @@
 .modal-container{
     display: block;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: black; 
+    background-color: rgba(0,0,0,0.4); 
 }
 
 .modal-content {
-    background-color: var(--main-blue-color);
-    color: var(--main-peach-color);
+    background-color: var(--main-pink-color);
+    color: var(--main-orange-color);
     margin: auto;
     padding: 20px;
     border:none;
@@ -26,8 +26,8 @@
 }
 
 .feedback-modal-content{
-    background-color: var(--main-blue-color);
-    color: var(--main-peach-color);
+    background-color: var(--main-pink-color);
+    color: var(--main-orange-color);
     margin: auto;
     padding: 20px;
     border:none;
@@ -47,8 +47,8 @@
 }
 
 .feedback-modal-content button{
-    background-color: var(--main-peach-color);
-    color: var(--main-blue-color);
+    background-color: var(--main-orange-color);
+    color: var(--main-pink-color);
 }
   
 .hide{
@@ -56,7 +56,7 @@
 }
 
 .close {
-    color: var(--main-peach-color);
+    color: var(--main-orange-color);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -64,7 +64,7 @@
   
 .close:hover,
 .close:focus {
-    color: var(--main-peach-color);
+    color: var(--main-orange-color);
     filter: brightness(150%);
     text-decoration: none;
     cursor: pointer;
@@ -91,16 +91,16 @@
 }
 
 .modal-content .recipe-details *{
-    background-color: var(--main-peach-color);
-    color:var(--main-blue-color);
+    background-color: var(--main-orange-color);
+    color:var(--main-pink-color);
     border-radius: 15px;
     padding:5px 15px;
     margin: 0 15px 0 0;
 }
 
 .modal-content .diet-type * {
-    border: 2px solid var(--main-peach-color);
-    color:var(--main-peach-color);
+    border: 2px solid var(--main-orange-color);
+    color:var(--main-orange-color);
     border-radius: 15px;
     padding:5px 15px;
     margin: 10px 15px 0 0;
@@ -187,7 +187,6 @@
         width:80%;
     }
 }
-
 
 @media screen and (max-width: 600px) {
     .modal-content .recipe-details{

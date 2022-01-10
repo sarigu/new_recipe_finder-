@@ -1,26 +1,28 @@
 :root {
-    --main-blue-color: #0215bf;
-    --main-peach-color: #fdefe5;
-  }
+    --main-pink-color: pink;
+    --main-orange-color: rgb(255, 136, 0);
+    --main-white-color: white;
+    --main-red-color: red;
+}
 
 body{
     width:100vw;
     height:100vh;
     margin:0;
     font-family: 'Poppins', sans-serif;
-    color:  var(--main-blue-color);
+    color:  var(--main-pink-color);
 }
 
 a{
     text-decoration: none;
-    color: var(--main-blue-color);
+    color: var(--main-pink-color);
 }
 
 .subpage{
     width:100vw;
     height:calc(100vh - 110px);
     padding:20px;
-    background-color:  var(--main-peach-color);
+    background-color:  var(--main-orange-color);
     overflow: hidden;
 }
 
@@ -28,7 +30,7 @@ a{
     width:100vw;
     min-height: 100vh;
     padding:20px; 
-    background-color:  var(--main-peach-color);
+    background-color:  var(--main-orange-color);
 }
 
 .rotated-heading{
@@ -39,7 +41,6 @@ a{
     margin:0;
 }
 
-
 input, textarea, button, select{
     padding:10px;
     border:none;
@@ -47,22 +48,22 @@ input, textarea, button, select{
 }
 
 input, textarea , select{
-    border: 1px solid  var(--main-blue-color);
+    border: 1px solid  var(--main-pink-color);
     background-color: transparent;
-    color:var(--main-blue-color);
+    color:var(--main-pink-color);
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
 }
 
 input::placeholder, textarea::placeholder{
-    color: var(--main-blue-color);
+    color: var(--main-pink-color);
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
 }
 
 button, input[type=submit]{
-    background-color: var(--main-blue-color);
-    color: var(--main-peach-color);
+    background-color: var(--main-pink-color);
+    color: var(--main-orange-color);
 }
 
 section{

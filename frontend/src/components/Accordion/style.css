@@ -2,7 +2,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr;
-    border-bottom: 1px solid  var(--main-blue-color);
+    border-bottom: 1px solid  var(--main-pink-color);
     padding: 24px 0 24px 0;
     grid-gap: 0 24px;
     cursor: pointer;
@@ -12,14 +12,14 @@
     width: 32px;
     height: 32px;
     background-color: transparent;
-    border: 3px solid var(--main-blue-color);
+    border: 3px solid var(--main-pink-color);
     border-radius: 50%;
     margin-top: 8px;
     transition: 0.3s;
 }
 
 .circle-status.opened{
-    background:  var(--main-blue-color);
+    background-color:  var(--main-pink-color);
 }
 
 .info.opened{
@@ -36,6 +36,7 @@
 
 .info p{
     text-align: left !important;
+    color:var(--main-pink-color);
 }
 
 @media screen and (max-width: 600px) {

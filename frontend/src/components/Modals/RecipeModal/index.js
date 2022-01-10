@@ -121,7 +121,6 @@ function RecipeModal({ recipe, modalShows, handleClose }) {
             }
         </div>
     );
-
 }
 
 export default RecipeModal;

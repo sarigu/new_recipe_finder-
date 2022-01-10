@@ -21,7 +21,6 @@ function MealsPage() {
                 setIsLoading(false);
             })
             .catch((err) => {
-                console.log(err);
                 setIsLoading(false);
             });
     }, []);
@@ -81,7 +80,6 @@ function MealsPage() {
             />
         </>
     );
-
 }
 
 export default MealsPage;

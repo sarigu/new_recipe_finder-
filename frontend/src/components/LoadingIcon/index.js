@@ -10,7 +10,6 @@ function LoadingIcon() {
             <div></div>
         </div>
     );
-
 }
 
 export default LoadingIcon;
